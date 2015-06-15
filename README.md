@@ -1,4 +1,4 @@
 itmosh
 ======
 
-A and some utilities for the ItmOS.
+A shell and some utilities for the ItmOS.
