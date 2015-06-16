@@ -126,17 +126,20 @@ static char* substring(char* s, size_t len)
 };
 
 #define INCREASE_CAP(cap) cap = cap ? cap << 1 : 1;
-#define PUSH_BACK(v, e, cap, size)                    \
-  do {                                                \
-    if (size + 1 > cap) {                             \
-      INCREASE_CAP(cap);                              \
-      char** new_v = realloc(v, sizeof(char*) * cap); \
-      if (!new_v) {                                   \
-        goto ERROR;                                   \
-      }                                               \
-      v = new_v;                                      \
-    }                                                 \
-    v[size++] = e;                                    \
+#define PUSH_BACK(v, e, cap, size)			\
+  do {							\
+    if (size + 1 > cap) {				\
+      size_t old_cap = cap;				\
+      INCREASE_CAP(cap);				\
+      char** new_v = malloc(sizeof(char*) * cap);	\
+      if (!new_v) {					\
+        goto ERROR;					\
+      }						\
+      memcpy(new_v, v, sizeof(char*) * old_cap);	\
+      free(v);						\
+      v = new_v;					\
+    }							\
+    v[size++] = e;					\
   } while (0)
 
 char** split(char* s, char c, _Bool skip_sep)
@@ -205,7 +208,7 @@ int runpiped(execargs_t** programs, int n)
   int next_pipe[2];
 
   for (int i = 0; i < n; i++) {
-    // TODO: Here is bug with closing, user pipe2(O_CLOEXEC) instead
+    // TODO: Here is bug with closing, use pipe2(O_CLOEXEC) instead
     if (i < n - 1 && pipe(next_pipe) < 0) {
       QUIT(-1);
     } else if (i == n - 1) {

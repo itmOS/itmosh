@@ -11,8 +11,6 @@ int close(int fd);
 void _exit(int status);
 
 int pipe(int pipefd[2]);
-// TODO: Seems that I have no time to implement this, so it will ignore options
-int pipe2(int pipefd[2], int options);
 int dup2(int oldfd, int newfd);
 
 pid_t fork(void);

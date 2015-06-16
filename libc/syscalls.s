@@ -32,14 +32,6 @@ pipe:
 	int 0x80
 	ret
 
-;;; TODO: pipe2 is not really supported, just calls pipe
-global pipe2
-pipe2:
-	mov eax, 52
-	mov edi, [esp + 4]
-	int 0x80
-	ret
-
 ;;; TODO: Remove this as soon as posible
 global write_err
 write_err:
