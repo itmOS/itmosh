@@ -6,7 +6,7 @@ export CFLAGS = -Wall -Wextra -std=c11 -ffreestanding \
 
 LDFLAGS = -e main -T linker.ld --oformat=binary -melf_i386
 
-all: echo.bin
+all: clean echo.bin itmosh.bin
 
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) $^ -c
@@ -15,6 +15,9 @@ libc/libc.a:
 	make -C libc --no-print-directory
 
 echo.bin: echo.o libc/libc.a
+	$(LD) $(LDFLAGS) $^ -o $@
+
+itmosh.bin: itmosh.o libc/libc.a
 	$(LD) $(LDFLAGS) $^ -o $@
 
 linux: clean
