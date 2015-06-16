@@ -9,4 +9,6 @@ int close(int fd);
 
 int pipe(int pipefd[2]);
 
+pid_t fork(void);
+
 #endif

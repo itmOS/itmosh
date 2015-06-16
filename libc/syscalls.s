@@ -31,3 +31,9 @@ write_err:
 	mov esi, [esp + 4]
 	int 0x80
 	ret
+
+global fork
+fork:
+	mov eax, 6
+	int 0x80
+	ret
