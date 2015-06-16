@@ -1,5 +1,5 @@
 OUTPUT = libc.a
-OBJ = syscalls.o string.o stdio.o
+OBJ = syscalls.o string.o stdio.o bufio.o helpers.o
 
 AS = yasm
 ASFLAGS = -f elf32
