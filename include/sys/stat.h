@@ -1,6 +1,12 @@
 #ifndef SYS_STAT_H
 #define SYS_STAT_H
 
+enum {
+  STDIN_FILENO = 0,
+  STDOUT_FILENO = 1,
+  STDERR_FILENO = 2
+};
+
 // Zero or more flags can be bitwise-or'd
 enum {
   O_RDONLY = 1,

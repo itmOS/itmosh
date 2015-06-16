@@ -1,8 +1,10 @@
-CXXFLAGS = -Wall -Wextra -std=c++11 -fno-rtti -fno-exceptions \
-	-ffreestanding -nostartfiles \
-	-I include
-CFLAGS = -Wall -Wextra -std=c11 -ffreestanding
-LDFLAGS = -e main -T linker.ld --oformat=binary
+export CXXFLAGS = -Wall -Wextra -std=c++11 -fno-rtti -fno-exceptions \
+	-ffreestanding -nostartfiles -nostdinc \
+	-I include -m32
+export CFLAGS = -Wall -Wextra -std=c11 -ffreestanding \
+	-nostdinc -I include -m32
+
+LDFLAGS = -e main -T linker.ld --oformat=binary -melf_i386
 
 all: itmosh.bin
 

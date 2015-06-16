@@ -1,8 +1,10 @@
 OUTPUT = libc.a
-OBJ = syscalls.o
+OBJ = syscalls.o string.o
 
-export AS = yasm
-export ASFLAGS = -f elf32
+AS = yasm
+ASFLAGS = -f elf32
+
+CFLAGS += -I ../include
 
 all: $(OUTPUT)
 
