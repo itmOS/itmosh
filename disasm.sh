@@ -5,4 +5,4 @@ if [[ $# -ne 1 ]]; then
 	exit 1
 fi
 
-objdump -b binary --adjust-vma=0x100 -D $@ -m i386
+objdump -b binary --adjust-vma=0x1000 -D $@ -m i386

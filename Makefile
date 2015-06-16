@@ -1,10 +1,10 @@
 export CXXFLAGS = -Wall -Wextra -std=c++11 -fno-rtti -fno-exceptions \
 	-ffreestanding -nostartfiles -nostdinc \
-	-I include -m32
+	-I include -m32 -I libc
 export CFLAGS = -Wall -Wextra -std=c11 -ffreestanding \
-	-nostdinc -I include -m32
+	-nostdinc -I include -m32 -I libc
 
-LDFLAGS = -e main -T linker.ld --oformat=binary -melf_i386
+LDFLAGS = -e _start -T linker.ld --oformat=binary -melf_i386
 
 all: clean echo.bin itmosh.bin
 
@@ -14,10 +14,10 @@ all: clean echo.bin itmosh.bin
 libc/libc.a:
 	make -C libc --no-print-directory
 
-echo.bin: echo.o libc/libc.a
+echo.bin: echo.o libc/libc.a libc_start.o
 	$(LD) $(LDFLAGS) $^ -o $@
 
-itmosh.bin: itmosh.o libc/libc.a
+itmosh.bin: itmosh.o libc/libc.a libc_start.o
 	$(LD) $(LDFLAGS) $^ -o $@
 
 linux: clean
