@@ -19,4 +19,7 @@ pid_t fork(void);
 int execv(const char* path, char* const argv[]);
 int execvp(const char* path, char* const argv[]);
 
+// TODO: man 2 sbrk says that intptr_t should be passed as argument
+void* sbrk(int increment);
+
 #endif

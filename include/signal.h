@@ -5,7 +5,9 @@ enum {
   SIGKILL
 };
 
+typedef int pid_t;
+
 // TODO: We cannot implement kill, so it will do nothing
-int kill(int child, int signal);
+int kill(pid_t child, int signal);
 
 #endif

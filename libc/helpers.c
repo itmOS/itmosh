@@ -1,16 +1,16 @@
 #include "helpers.h"
 
-#include <unistd.h>
-#include <fcntl.h>
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <signal.h>
+#include <sys/stat.h>
+
+#include <fcntl.h>
+#include <sys/wait.h>
 
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 
 ssize_t read_(int fd,
               void* buf,
@@ -205,7 +205,8 @@ int runpiped(execargs_t** programs, int n)
   int next_pipe[2];
 
   for (int i = 0; i < n; i++) {
-    if (i < n - 1 && pipe2(next_pipe, O_CLOEXEC) < 0) {
+    // TODO: Here is bug with closing, user pipe2(O_CLOEXEC) instead
+    if (i < n - 1 && pipe(next_pipe) < 0) {
       QUIT(-1);
     } else if (i == n - 1) {
       next_pipe[1] = STDOUT_FILENO;
@@ -214,7 +215,8 @@ int runpiped(execargs_t** programs, int n)
     if ((children[i] = fork())) {
       if (children[i] < 0) {
         for (int j = 0; j < i; j++) {
-          kill(children[j], SIGKILL);
+	  // TODO: Add kill?
+          //kill(children[j], SIGKILL);
         }
 
         if (input != STDIN_FILENO) {
