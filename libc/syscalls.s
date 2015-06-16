@@ -37,3 +37,10 @@ fork:
 	mov eax, 6
 	int 0x80
 	ret
+
+global _exit
+_exit:
+	mov eax, 0
+	mov edi, [esp + 4]
+	int 0x80
+	ret

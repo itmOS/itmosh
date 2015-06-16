@@ -1,6 +1,7 @@
 #include <stddef.h>
 
 int main(int argc, char** argv);
+void _exit(int exit_code);
 
 // Entry point of the every program
 void _start(void)
@@ -22,5 +23,5 @@ void _start(void)
     args = s;
   }
 
-  main(argc, ptrs);
+  _exit(main(argc, ptrs));
 }
