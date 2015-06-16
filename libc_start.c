@@ -6,7 +6,7 @@ int main(int argc, char** argv);
 void _start(void)
 {
   // arguments are located at the 4MB separated by zero, followed by double zero
-  char* args = 0x400000;
+  char* args = (char*) 0x400000;
   // We support maximum 256 arguments
   char* ptrs[256] = {0};
   size_t argc = 0;
