@@ -4,12 +4,12 @@ export CXXFLAGS = -Wall -Wextra -std=c++11 -fno-rtti -fno-exceptions \
 export CFLAGS = -Wall -Wextra -std=c11 -ffreestanding \
 	-nostdinc -I include -m32 -I libc
 
+AS = yasm
+ASFLAGS = -f elf32
+
 LDFLAGS = -e _start -T linker.ld --oformat=binary -melf_i386
 
 all: clean echo.bin itmosh.bin
-
-%.o: %.cc
-	$(CXX) $(CXXFLAGS) $^ -c
 
 libc/libc.a:
 	make -C libc --no-print-directory

@@ -5,14 +5,16 @@
 #include <string.h>
 #include <stdio.h>
 
+int write_err(char*);
+
 int main(int argc, char** argv)
 {
   for (int i = 1; i < argc; i++) {
-    printf(argv[i]);
+    write_err(argv[i]);
     if (i < argc - 1) {
-      printf(" ");
+      write_err(" ");
     }
   }
-  printf("\n");
+  write_err("\n");
   return 0;
 }
